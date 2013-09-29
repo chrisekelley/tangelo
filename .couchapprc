@@ -1,0 +1,4 @@
+{ "env":
+  { "default"    : {"db": "http://admin:luvcouch@localhost:5984/tangelo"}
+  }
+}

@@ -1,0 +1,471 @@
+{
+"prototype": "grid",
+"startTime": 1367779882007,
+"itemType": "kis letters",
+"reportType": "progress",
+"studentId": "9a51530b3dee9fd7f0357c16ed000c35",
+"subtestId": "e1f56642-6285-d091-3024-f015f14d653a",
+"part": 1,
+"klassId": "08be745ccea2d8fadf7202b1b9000b23",
+"timeAllowed": 60,
+"editedBy": "admin",
+"updated": "Sun May 05 2013 14:58:05 GMT-0400 (EDT)",
+"hash": "cNCUlwGP9lPlcTGqo2AgSDJMY7M=",
+"subtestData": {
+"capture_last_attempted": true,
+"item_at_time": null,
+"time_intermediate_captured": null,
+"capture_item_at_time": false,
+"auto_stop": false,
+"attempted": "40",
+"items": [
+{
+"itemResult": "incorrect",
+"itemLabel": "g"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "N"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "u"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "e"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "k"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "t"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "n"
+},
+{
+"itemResult": "correct",
+"itemLabel": "i"
+},
+{
+"itemResult": "correct",
+"itemLabel": "a"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "o"
+},
+{
+"itemResult": "correct",
+"itemLabel": "A"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "Z"
+},
+{
+"itemResult": "correct",
+"itemLabel": "a"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "V"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "S"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "I"
+},
+{
+"itemResult": "correct",
+"itemLabel": "a"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "l"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "e"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "U"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "e"
+},
+{
+"itemResult": "correct",
+"itemLabel": "i"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "Ny"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "Dh"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "i"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "w"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "m"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "Y"
+},
+{
+"itemResult": "correct",
+"itemLabel": "i"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "g"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "n"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "k"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "y"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "M"
+},
+{
+"itemResult": "correct",
+"itemLabel": "a"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "I"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "h"
+},
+{
+"itemResult": "correct",
+"itemLabel": "i"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "d"
+},
+{
+"itemResult": "incorrect",
+"itemLabel": "M"
+},
+{
+"itemResult": "missing",
+"itemLabel": "w"
+},
+{
+"itemResult": "missing",
+"itemLabel": "l"
+},
+{
+"itemResult": "missing",
+"itemLabel": "e"
+},
+{
+"itemResult": "missing",
+"itemLabel": "u"
+},
+{
+"itemResult": "missing",
+"itemLabel": "z"
+},
+{
+"itemResult": "missing",
+"itemLabel": "W"
+},
+{
+"itemResult": "missing",
+"itemLabel": "i"
+},
+{
+"itemResult": "missing",
+"itemLabel": "n"
+},
+{
+"itemResult": "missing",
+"itemLabel": "O"
+},
+{
+"itemResult": "missing",
+"itemLabel": "o"
+},
+{
+"itemResult": "missing",
+"itemLabel": "a"
+},
+{
+"itemResult": "missing",
+"itemLabel": "n"
+},
+{
+"itemResult": "missing",
+"itemLabel": "m"
+},
+{
+"itemResult": "missing",
+"itemLabel": "a"
+},
+{
+"itemResult": "missing",
+"itemLabel": "T"
+},
+{
+"itemResult": "missing",
+"itemLabel": "A"
+},
+{
+"itemResult": "missing",
+"itemLabel": "i"
+},
+{
+"itemResult": "missing",
+"itemLabel": "A"
+},
+{
+"itemResult": "missing",
+"itemLabel": "i"
+},
+{
+"itemResult": "missing",
+"itemLabel": "ng'"
+},
+{
+"itemResult": "missing",
+"itemLabel": "f"
+},
+{
+"itemResult": "missing",
+"itemLabel": "a"
+},
+{
+"itemResult": "missing",
+"itemLabel": "N"
+},
+{
+"itemResult": "missing",
+"itemLabel": "E"
+},
+{
+"itemResult": "missing",
+"itemLabel": "L"
+},
+{
+"itemResult": "missing",
+"itemLabel": "u"
+},
+{
+"itemResult": "missing",
+"itemLabel": "sh"
+},
+{
+"itemResult": "missing",
+"itemLabel": "k"
+},
+{
+"itemResult": "missing",
+"itemLabel": "p"
+},
+{
+"itemResult": "missing",
+"itemLabel": "O"
+},
+{
+"itemResult": "missing",
+"itemLabel": "n"
+},
+{
+"itemResult": "missing",
+"itemLabel": "A"
+},
+{
+"itemResult": "missing",
+"itemLabel": "u"
+},
+{
+"itemResult": "missing",
+"itemLabel": "I"
+},
+{
+"itemResult": "missing",
+"itemLabel": "a"
+},
+{
+"itemResult": "missing",
+"itemLabel": "I"
+},
+{
+"itemResult": "missing",
+"itemLabel": "i"
+},
+{
+"itemResult": "missing",
+"itemLabel": "a"
+},
+{
+"itemResult": "missing",
+"itemLabel": "k"
+},
+{
+"itemResult": "missing",
+"itemLabel": "h"
+},
+{
+"itemResult": "missing",
+"itemLabel": "a"
+},
+{
+"itemResult": "missing",
+"itemLabel": "i"
+},
+{
+"itemResult": "missing",
+"itemLabel": "b"
+},
+{
+"itemResult": "missing",
+"itemLabel": "R"
+},
+{
+"itemResult": "missing",
+"itemLabel": "B"
+},
+{
+"itemResult": "missing",
+"itemLabel": "a"
+},
+{
+"itemResult": "missing",
+"itemLabel": "U"
+},
+{
+"itemResult": "missing",
+"itemLabel": "ch"
+},
+{
+"itemResult": "missing",
+"itemLabel": "m"
+},
+{
+"itemResult": "missing",
+"itemLabel": "t"
+},
+{
+"itemResult": "missing",
+"itemLabel": "gh"
+},
+{
+"itemResult": "missing",
+"itemLabel": "D"
+},
+{
+"itemResult": "missing",
+"itemLabel": "s"
+},
+{
+"itemResult": "missing",
+"itemLabel": "K"
+},
+{
+"itemResult": "missing",
+"itemLabel": "a"
+},
+{
+"itemResult": "missing",
+"itemLabel": "A"
+},
+{
+"itemResult": "missing",
+"itemLabel": "o"
+},
+{
+"itemResult": "missing",
+"itemLabel": "a"
+},
+{
+"itemResult": "missing",
+"itemLabel": "th"
+},
+{
+"itemResult": "missing",
+"itemLabel": "n"
+}
+],
+"time_remain": 0,
+"mark_record": [
+"1",
+"3",
+"4",
+"6",
+"10",
+"9",
+"8",
+"7",
+"9",
+"8",
+"5",
+"2",
+"12",
+"14",
+"15",
+"16",
+"18",
+"19",
+"20",
+"30",
+29,
+28,
+27,
+26,
+25,
+24,
+23,
+22,
+21,
+"40",
+39,
+38,
+37,
+36,
+35,
+34,
+33,
+32,
+31,
+"35",
+"29",
+"22",
+"38"
+],
+"variable_name": "letter1_"
+},
+"collection": "result"}
