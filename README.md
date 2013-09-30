@@ -2,24 +2,29 @@
 
 This demo uses the Backbone Comments example as a basis for testing the [Stanford Javascript Crypto Library](http://crypto.stanford.edu/sjcl/)
 
-It uses a modified version of backbone-couchdb.js to make the encryption as seamless as possible
+It uses a modified version of backbone-couchdb.js to make the encryption as seamless as possible.
 
-Set the encryption password in app.js:
+Set the encryption password, salt, and initialization vector(iv) in app.js:
 
     Backbone.couch_connector.config.encryption_password = "iWouldGoOutTonight";
+    Backbone.couch_connector.config.iv = "7015C150 175DC714 8870D563 E9099C4C";
+    Backbone.couch_connector.config.salt =  "EF6BC741 95BE4F70";
 
-Note that if you change the password, you'll need to generate a new key and change the settings in backbone-couchdb.js
+Note that if you change the password, you'll need to generate new salt and iv. The [SJLC demo](http://bitwiseshiftleft.github.io/sjcl/demo/) is a handy tool for this.
 
-    encryptedJsonDefaults: { v:1, iter:1000, ks:256, ts:64, mode:"ccm", adata:"", cipher:"aes"},
-    iv: "7015C150 175DC714 8870D563 E9099C4C",
-    salt: "EF6BC741 95BE4F70",
-    key: "DFC5F044 79957FDC 0A6F54B3 C8B4512C 0D86DAF4 E96AE8A6 69D82B15 439C0175"
+You may also change more encryption settings in backbone-couchdb.js. Setting the key *might* speed things up a tad.
+The key is computed from the password, salt and strengthening factor. It will be used internally by the cipher.
+
+  Backbone.couch_connector.config.key =  null;
+  Backbone.couch_connector.config.encryptedJsonDefaults = { v:1, iter:1000, ks:256, ts:64, mode:"ccm", adata:"", cipher:"aes"}
+
+The encrypt/decrypt functions for this demo are in coconut-utils-extra.js
 
 View the demo at http://localhost:5984/tangelo/_design/backbone_couchapp_comments/index.html
 
 # Details
 
-The SJCL library encrypt function returns an object that includes the salt, initialization vector(i.v.), key in addition to other static properties:
+The SJCL library encrypt function returns an object that includes the salt, initialization vector(iv), key in addition to other static properties:
 
         {"iv":"wevkdWea1szC9M8bq4TMUw==",
         "v":1,

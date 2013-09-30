@@ -1,9 +1,9 @@
 (function() {
-  var con;
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
-    for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
-    function ctor() { this.constructor = child; }
-    ctor.prototype = parent.prototype;
+    var con;
+    var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
+        for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
+        function ctor() { this.constructor = child; }
+        ctor.prototype = parent.prototype;
     child.prototype = new ctor;
     child.__super__ = parent.prototype;
     return child;
@@ -15,13 +15,7 @@
       view_name: "byCollection",
       global_changes: false,
       base_url: null,
-      encryption_password: null,
-      encryptedJsonDefaults: { v:1, iter:1000, ks:256, ts:64, mode:"ccm", adata:"", cipher:"aes"},
-      iv: "7015C150 175DC714 8870D563 E9099C4C",
-      salt: "EF6BC741 95BE4F70",
-      key: "DFC5F044 79957FDC 0A6F54B3 C8B4512C 0D86DAF4 E96AE8A6 69D82B15 439C0175"
-      //ct: "{"iv":"OEuXh0bHtqvvLQfn+xpl8Q==","v":1,"iter":1000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"mJ4dDebBsuw=","ct":"ZRMuj+xH7Mhx1tKY"}"
-      //iv: sjcl.random.randomWords(4,0)
+      encryption_password: null
     },
     helpers: {
       extract_collection_name: function(model) {
@@ -82,37 +76,16 @@
           _ref = data.rows;
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             doc = _ref[_i];
-            //_temp.push(doc.value);
             var currentDoc = doc.value
-
-
             for (var property in currentDoc) {
               if (currentDoc.hasOwnProperty(property)) {
-                if ((property !== "_id") && (property !== "_rev") && (property !== "collection"))  {
-                  var plaintext;
-                  var value = currentDoc[property];
-                  var ciphertext = sjcl.codec.base64.toBits(value);
-                  var json = {};
-                  var iv = sjcl.codec.hex.toBits(con.config.iv);
-                  var salt = sjcl.codec.hex.toBits(con.config.salt);
-                  var key = sjcl.codec.hex.toBits(con.config.key);
-                  _.extend(json, con.config.encryptedJsonDefaults, {"iv": iv }, {"ct": value },
-                      {"password": con.config.encryption_password }, {"salt": salt }, {"key": key });
-                  // adds key to json
-                  if (json.key.length === 0) {
-                    doPbkdf2(json, true);
+                  if ((property !== "_id") && (property !== "_rev") && (property !== "collection")) {
+                      var value = currentDoc[property];
+                      var plaintext = decrypt(value, con.config.encryptedJsonDefaults, con.config.encryption_password, con.config.salt, con.config.iv, con.config.key);
+                      currentDoc[property] = plaintext;
                   }
-                  var aes = new sjcl.cipher.aes(key);
-                  var adata =  con.config.encryptedJsonDefaults.adata;
-                  var mode =  con.config.encryptedJsonDefaults.mode
-                  var tag = parseInt(con.config.encryptedJsonDefaults.ts)
-                  plaintext = sjcl.codec.utf8String.fromBits(sjcl.mode[mode].decrypt(aes, ciphertext, iv, adata, tag));
-                  console.log(property + " -> " + value + " -> " + plaintext);
-                  currentDoc[property] = plaintext;
-                }
               }
             }
-
             _temp.push(currentDoc);
           }
           return opts.success(_temp);
@@ -136,30 +109,15 @@
       });
     },
     create: function(model, opts) {
-      var coll, vals;
-
-      var modelCloned = _.clone(model.attributes);
-      for (var key in modelCloned) {
-        if (modelCloned.hasOwnProperty(key)) {
-          var value = modelCloned[key];
-          var json = {};
-          var iv = sjcl.codec.hex.toBits(con.config.iv)
-          var salt = sjcl.codec.hex.toBits(con.config.salt);
-          _.extend(json, con.config.encryptedJsonDefaults, {"iv": iv }, {"salt": salt}  );
-          var ct = sjcl.encrypt(con.config.encryption_password, value.toString(), json).replace(/,/g,",\n");
-          var ciphertext = ct.match(/"ct":"([^"]*)"/)[1];
-          console.log(key + " -> " + value + " -> " + ciphertext);
-          var props = {};
-          props[key] = ciphertext;
-          model.set(props, {silent:true})
+        var coll, vals;
+        if (typeof con.config.encryption_password !== 'undefined') {
+            encrypt(model, con.config.encryptedJsonDefaults, con.config.encryption_password, con.config.salt, con.config.iv);
         }
-      }
-
-      vals = model.toJSON();
-      coll = this.helpers.extract_collection_name(model);
-      if (coll.length > 0) {
-        vals.collection = coll;
-      }
+        vals = model.toJSON();
+        coll = this.helpers.extract_collection_name(model);
+        if (coll.length > 0) {
+            vals.collection = coll;
+        }
 
       return this.helpers.make_db().saveDoc(vals, {
         success: function(doc) {

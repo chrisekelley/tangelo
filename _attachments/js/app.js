@@ -4,7 +4,10 @@ $(function(){
   Backbone.couch_connector.config.db_name = "tangelo";
   Backbone.couch_connector.config.ddoc_name = "backbone_couchapp_comments";
   Backbone.couch_connector.config.encryption_password = "iWouldGoOutTonight";
-
+  Backbone.couch_connector.config.iv = "7015C150 175DC714 8870D563 E9099C4C";
+  Backbone.couch_connector.config.salt =  "EF6BC741 95BE4F70";
+  Backbone.couch_connector.config.encryptedJsonDefaults = { v:1, iter:1000, ks:256, ts:64, mode:"ccm", adata:"", cipher:"aes"}
+  Backbone.couch_connector.config.key =  null;
   // If set to true, the connector will listen to the changes feed
   // and will provide your models with real time remote updates.
   Backbone.couch_connector.config.global_changes = true;
