@@ -91,8 +91,6 @@
                 if ((property !== "_id") && (property !== "_rev") && (property !== "collection"))  {
                   var plaintext;
                   var value = currentDoc[property];
-                  //ct: "{"iv":"OEuXh0bHtqvvLQfn+xpl8Q==","v":1,"iter":1000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"mJ4dDebBsuw=","ct":"ZRMuj+xH7Mhx1tKY"}"
-
                   var ciphertext = sjcl.codec.base64.toBits(value);
                   var json = {};
                   var iv = sjcl.codec.hex.toBits(con.config.iv);
@@ -109,15 +107,7 @@
                   var mode =  con.config.encryptedJsonDefaults.mode
                   var tag = parseInt(con.config.encryptedJsonDefaults.ts)
                   plaintext = sjcl.codec.utf8String.fromBits(sjcl.mode[mode].decrypt(aes, ciphertext, iv, adata, tag));
-
                   console.log(property + " -> " + value + " -> " + plaintext);
-                  //vals[key] = ciphertext;
-                  //model.set(key, ciphertext)
-//                var props = {};
-//                props[key] = ciphertext;
-//                model.set(props, {silent:true})
-
-
                   currentDoc[property] = plaintext;
                 }
               }
@@ -149,25 +139,16 @@
       var coll, vals;
 
       var modelCloned = _.clone(model.attributes);
-      //var modelCloned = model.attributes;
       for (var key in modelCloned) {
         if (modelCloned.hasOwnProperty(key)) {
           var value = modelCloned[key];
-          //var json = {"iv":"JF0e/oeQR9oRFg7l6MNyLg==","v":1,"iter":1000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"7UZC1LA4RNY=","ct":"bKeq0GIcYYRTpniL/g=="};
           var json = {};
-          //var iv = sjcl.random.randomWords(4,0)
           var iv = sjcl.codec.hex.toBits(con.config.iv)
           var salt = sjcl.codec.hex.toBits(con.config.salt);
           _.extend(json, con.config.encryptedJsonDefaults, {"iv": iv }, {"salt": salt}  );
-
-          //ct = sjcl.encrypt(password || key, plaintext, p, rp).replace(/,/g,",\n");
           var ct = sjcl.encrypt(con.config.encryption_password, value.toString(), json).replace(/,/g,",\n");
-          //ct = sjcl.encrypt(password || key, plaintext, p, rp).replace(/,/g,",\n");
-
           var ciphertext = ct.match(/"ct":"([^"]*)"/)[1];
           console.log(key + " -> " + value + " -> " + ciphertext);
-          //vals[key] = ciphertext;
-          //model.set(key, ciphertext)
           var props = {};
           props[key] = ciphertext;
           model.set(props, {silent:true})
