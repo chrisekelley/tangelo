@@ -1,3 +1,4 @@
+
 (function() {
     var con;
     var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
@@ -14,8 +15,7 @@
       ddoc_name: "backbone_example",
       view_name: "byCollection",
       global_changes: false,
-      base_url: null,
-      encryption_password: null
+      base_url: null
     },
     helpers: {
       extract_collection_name: function(model) {
@@ -75,18 +75,9 @@
           _temp = [];
           _ref = data.rows;
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            doc = _ref[_i];
-            var currentDoc = doc.value
-            for (var property in currentDoc) {
-              if (currentDoc.hasOwnProperty(property)) {
-                  if ((property !== "_id") && (property !== "_rev") && (property !== "collection")) {
-                      var value = currentDoc[property];
-                      var plaintext = decrypt(value, con.config.encryptedJsonDefaults, con.config.encryption_password, con.config.salt, con.config.iv, con.config.key);
-                      currentDoc[property] = plaintext;
-                  }
-              }
-            }
-            _temp.push(currentDoc);
+              doc = _ref[_i];
+              var currentDoc = decryptDocument(doc, con.config.encryptedJsonDefaults, con.config.encryption_password, con.config.salt, con.config.iv, con.config.key);
+              _temp.push(currentDoc);
           }
           return opts.success(_temp);
         }, this),
@@ -111,7 +102,7 @@
     create: function(model, opts) {
         var coll, vals;
         if (typeof con.config.encryption_password !== 'undefined') {
-            encrypt(model, con.config.encryptedJsonDefaults, con.config.encryption_password, con.config.salt, con.config.iv);
+            encryptDocument(model, con.config.encryptedJsonDefaults, con.config.encryption_password, con.config.salt, con.config.iv);
         }
         vals = model.toJSON();
         coll = this.helpers.extract_collection_name(model);

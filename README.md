@@ -15,10 +15,11 @@ Note that if you change the password, you'll need to generate new salt and iv. T
 You may also change more encryption settings in backbone-couchdb.js. Setting the key *might* speed things up a tad.
 The key is computed from the password, salt and strengthening factor. It will be used internally by the cipher.
 
-  Backbone.couch_connector.config.key =  null;
-  Backbone.couch_connector.config.encryptedJsonDefaults = { v:1, iter:1000, ks:256, ts:64, mode:"ccm", adata:"", cipher:"aes"}
+    Backbone.couch_connector.config.key =  null;
+    Backbone.couch_connector.config.encryptedJsonDefaults = { v:1, iter:1000, ks:256, ts:64, mode:"ccm", adata:"", cipher:"aes"}
 
-The encrypt/decrypt functions for this demo are in coconut-utils-extra.js
+The encryptDocument/decryptDocument functions for this demo are in coconut-utils-extra.js. Those two functions encrypt/decrypt all of the values
+in the document except for_id, _rev, and collection properties.
 
 View the demo at http://localhost:5984/tangelo/_design/backbone_couchapp_comments/index.html
 

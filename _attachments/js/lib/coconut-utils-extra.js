@@ -1,23 +1,50 @@
-function encrypt(model, defaults, password, salt, iv) {
+function encryptDocument(model, defaults, password, salt, iv) {
     var modelAttributes = model.attributes;
     for (var key in modelAttributes) {
         if (modelAttributes.hasOwnProperty(key)) {
-            var value = modelAttributes[key];
-            var json = {};
-            var ivHex = sjcl.codec.hex.toBits(iv)
-            var saltHex = sjcl.codec.hex.toBits(salt);
-            _.extend(json, defaults, {"iv": ivHex }, {"salt": saltHex});
-            var ct = sjcl.encrypt(password, value.toString(), json).replace(/,/g, ",\n");
-            var ciphertext = ct.match(/"ct":"([^"]*)"/)[1];
-            //console.log(key + " -> " + value + " -> " + ciphertext);
-            var props = {};
-            props[key] = ciphertext;
-            model.set(props, {silent: true})
+            if ((key !== "_id") && (key !== "_rev") && (key !== "collection")) {
+                var __ret = encryptValue(modelAttributes, defaults, password, salt, iv, key);
+                var value = __ret.value;
+                var json = __ret.json;
+                var ivHex = __ret.ivHex;
+                var saltHex = __ret.saltHex;
+                var ct = __ret.ct;
+                var ciphertext = __ret.ciphertext;
+                //console.log(key + " -> " + value + " -> " + ciphertext);
+                var props = {};
+                props[key] = ciphertext;
+                model.set(props, {silent: true})
+            }
         }
     }
 }
 
-function decrypt(value, defaults, password, salt, iv, key) {
+function encryptValue(modelAttributes, defaults, password, salt, iv, key) {
+    var value = modelAttributes[key];
+    var json = {};
+    var ivHex = sjcl.codec.hex.toBits(iv)
+    var saltHex = sjcl.codec.hex.toBits(salt);
+    _.extend(json, defaults, {"iv": ivHex }, {"salt": saltHex});
+    var ct = sjcl.encrypt(password, value.toString(), json).replace(/,/g, ",\n");
+    var ciphertext = ct.match(/"ct":"([^"]*)"/)[1];
+    return {value: value, json: json, ivHex: ivHex, saltHex: saltHex, ct: ct, ciphertext: ciphertext};
+}
+
+function decryptDocument(doc, defaults, password, salt, iv, key) {
+    var currentDoc = doc.value
+    for (var property in currentDoc) {
+        if (currentDoc.hasOwnProperty(property)) {
+            if ((property !== "_id") && (property !== "_rev") && (property !== "collection")) {
+                var value = currentDoc[property];
+                var plaintext = decryptValue(value, defaults, password, salt, iv, key);
+                currentDoc[property] = plaintext;
+            }
+        }
+    }
+    return currentDoc;
+}
+
+function decryptValue(value, defaults, password, salt, iv, key) {
     var plaintext;
     var keyhex = "";
     var ciphertext = sjcl.codec.base64.toBits(value);
@@ -42,7 +69,7 @@ function decrypt(value, defaults, password, salt, iv, key) {
     return plaintext;
 }
 
-// kudos: sjcl
+// kudos: sjcl - computes the key
 /* compute PBKDF2 on the password. */
 function doPbkdf2(v, decrypting) {
   var salt=v.salt, key, hex = sjcl.codec.hex.fromBits, p={}, password = v.password;
