@@ -40,6 +40,7 @@ The SJCL library encrypt function returns an object that includes the salt, init
 
 The demo currently stores only the ciphertext (ct), which is the encrypted value, in order to reduce the amount of redundant data stored in the database.
 This measure does result in a compromise in the security of the data stored; it is preferable to have randomly-generated i.v. and salt.
+Here is a useful StackOverflow article about [init. vector and salt](http://stackoverflow.com/questions/3849684/is-it-insecure-to-pass-initialization-vector-and-salt-along-with-ciphertext).
 
 
 

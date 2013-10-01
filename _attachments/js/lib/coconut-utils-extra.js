@@ -13,7 +13,8 @@ function encryptDocument(model, defaults, password, salt, iv) {
                 //console.log(key + " -> " + value + " -> " + ciphertext);
                 var props = {};
                 props[key] = ciphertext;
-                model.set(props, {silent: true})
+                //model.set(props, {silent: true})
+                model.set(props)
             }
         }
     }
